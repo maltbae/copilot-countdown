@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Copilot Billing Countdown — Your Bill Changes in June</title>
+<meta name="description" content="GitHub Copilot moves to token billing June 1. Your $10/mo could become $30-80/mo. See the countdown and calculate your real cost.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.6}
+.container{max-width:720px;margin:0 auto;padding:20px}
+.hero{text-align:center;padding:60px 0 40px}
+.hero h1{font-size:2.2em;color:#ff6b6b;margin-bottom:10px;font-weight:800}
+.hero p{font-size:1.2em;color:#888}
+.countdown-box{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:16px;padding:40px 20px;text-align:center;margin:30px 0;border:1px solid #333}
+.countdown-label{font-size:1.1em;color:#888;margin-bottom:20px;text-transform:uppercase;letter-spacing:2px}
+.countdown{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+.countdown .unit{min-width:80px}
+.countdown .number{font-size:3em;font-weight:800;color:#ff6b6b;font-variant-numeric:tabular-nums}
+.countdown .label{font-size:0.8em;color:#666;text-transform:uppercase;letter-spacing:1px}
+.warning{background:#1a0a0a;border:1px solid #3d1515;border-radius:12px;padding:20px;margin:20px 0}
+.warning h2{color:#ff6b6b;margin-bottom:10px;font-size:1.3em}
+.fact{background:#111;border-left:3px solid #ff6b6b;padding:16px 20px;margin:16px 0;border-radius:0 8px 8px 0}
+.fact strong{color:#ff6b6b}
+.fact em{color:#aaa;font-style:normal}
+.calc-link{display:block;background:linear-gradient(135deg,#ff6b6b,#ee5a24);color:#fff;text-align:center;padding:18px;border-radius:12px;text-decoration:none;font-weight:700;font-size:1.15em;margin:30px 0;transition:transform .2s}
+.calc-link:hover{transform:scale(1.02)}
+.footer{text-align:center;padding:40px 0 20px;color:#444;font-size:0.85em}
+.footer a{color:#666}
+.daily-fact{background:#0d1117;border:1px solid #1f2937;border-radius:12px;padding:24px;margin:24px 0;text-align:center}
+.daily-fact h3{color:#ff6b6b;margin-bottom:12px;font-size:1.1em}
+.daily-fact blockquote{font-size:1.05em;color:#ccc;font-style:italic;border:none;padding:0;margin:0}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="hero">
+<h1>⏳ Your Copilot Bill Is About to Change</h1>
+<p>GitHub Copilot moves to token-based billing June 1, 2026</p>
+</div>
+
+<div class="countdown-box">
+<div class="countdown-label">Days until billing changes</div>
+<div class="countdown">
+<div class="unit"><div class="number" id="days">--</div><div class="label">Days</div></div>
+<div class="unit"><div class="number" id="hours">--</div><div class="label">Hours</div></div>
+<div class="unit"><div class="number" id="mins">--</div><div class="label">Minutes</div></div>
+<div class="unit"><div class="number" id="secs">--</div><div class="label">Seconds</div></div>
+</div>
+</div>
+
+<div class="daily-fact" id="todays-fact">
+<h3>📍 Today's Fact</h3>
+<blockquote id="fact-text">Loading...</blockquote>
+</div>
+
+<div class="warning">
+<h2>⚠️ What's Changing June 1</h2>
+<div class="fact"><strong>Token billing replaces flat-rate.</strong> <em>Your $10/mo gets 1,000 "AI Credits" worth $0.01 each = $10 total.</em></div>
+<div class="fact"><strong>3-8x subsidy removed.</strong> <em>gHacks confirmed GitHub was absorbing 3-8x your actual token cost. That ends June 1.</em></div>
+<div class="fact"><strong>No free models.</strong> <em>"Free models are no longer part of our offering" — every model now costs credits.</em></div>
+<div class="fact"><strong>Blind pricing.</strong> <em>GitHub has not published per-token rates for each model. You won't know the cost until you're billed.</em></div>
+<div class="fact"><strong>Credits don't roll over.</strong> <em>Light month? Credits vanish. Heavy month? Buy more at full price.</em></div>
+</div>
+
+<a href="https://maltbae.github.io/ai-cost-calculator/" class="calc-link">📊 Calculate Your Real Cost →</a>
+
+<div class="footer">
+<p>Data: <a href="https://github.blog/changelog/">GitHub Changelog</a> · <a href="https://www.ghacks.net/">gHacks</a> · Community reports</p>
+<p>Built by <a href="https://github.com/maltbae">maltbae</a></p>
+</div>
+</div>
+
+<script>
+const TARGET=new Date('2026-06-01T00:00:00Z');
+const facts=[
+'GitHub confirmed: "users could typically use between three and eight times the token value covered by their subscription." Your $10 subscription was actually worth $30-80 in tokens.',
+'The billing preview tool is NOW LIVE — users are seeing their actual consumption for the first time. Many are discovering they use 5x more than expected.',
+'Community revolt is underway: GitHub Discussion #192948 has hundreds of comments. r/GithubCopilot users are asking "does anyone know a better cheaper option?"',
+'Copilot Pro at $10/mo gets 1,000 AI Credits. A single complex agent session on a large codebase can consume 10,000+ tokens. That\'s $0.10 per session × 50 sessions/day = $150/month. On a $10 plan.',
+'GitHub is not publishing per-model token rates. You\'re being migrated to metered billing without knowing what each model costs. Imagine your utility refusing to show the rate per kWh.',
+'Unused AI Credits do NOT roll over. Light month? Those credits vanish. Heavy month? Buy more at $0.01 each. The house always wins.',
+'Free models are gone. "With the shift to usage-based billing, free models are no longer part of our offering." Every interaction now depletes your allowance.',
+];
+
+function update(){
+  const now=new Date();
+  const diff=TARGET-now;
+  if(diff<=0){document.getElementById('days').textContent='0';document.getElementById('hours').textContent='0';document.getElementById('mins').textContent='0';document.getElementById('secs').textContent='0';return}
+  const d=Math.floor(diff/864e5);
+  const h=Math.floor((diff%864e5)/36e5);
+  const m=Math.floor((diff%36e5)/6e4);
+  const s=Math.floor((diff%6e4)/1e3);
+  document.getElementById('days').textContent=d;
+  document.getElementById('hours').textContent=h;
+  document.getElementById('mins').textContent=m;
+  document.getElementById('secs').textContent=s;
+
+  const dayIndex=Math.max(0,29-d)%facts.length;
+  document.getElementById('fact-text').textContent=facts[dayIndex];
+}
+update();setInterval(update,1000);
+</script>
+</body>
+</html>
